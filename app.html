@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="bodyStyle">
+    <div>
+      <div class="inputStyle">
+        <label class="labelStyle" for="fname">Name: </label>
+        <input type="text" id="fname" name="fname" /><br />
+      </div>
+      <br />
+      <div class="inputStyle">
+        <label class="labelStyle" for="lname">Weight: </label>
+        <input
+          type="text"
+          id="lname"
+          name="lname"
+          placeholder="Enter weight in KG"
+        />
+      </div>
+      <br />
+      <div class="inputStyle">
+        <label class="labelStyle" for="height">Height: </label>
+        <input
+          type="text"
+          id="height"
+          name="height"
+          placeholder="Enter height in m"
+        />
+      </div>
+      <br />
+      <div class="inputStyle">
+        <label class="labelStyle" for="result">Result:</label>
+        <input type="text" id="result" style="margin-left: 25px" />
+      </div>
+      <br /><br />
+      <div style="margin-left: 80px">
+        <button class="buttonStyle" onclick="addBMI()">Submit</button>
+      </div>
+      <br />
+      <div style="margin-left: 80px">
+        <button class="buttonStyle" onclick="clearInput()">Clear All</button>
+      </div>
+    </div>
+    <br /><br />
+  </body>
+  <script>
+    function addBMI() {
+      let name = document.getElementById("fname").value;
+      document.getElementById("fname").innerHTML = name;
+      let weight = document.getElementById("lname").value;
+      document.getElementById("lname").innerHTML = weight;
+      let height = document.getElementById("height").value;
+      document.getElementById("lname").innerHTML = height;
+      if (isNaN(weight) || isNaN(height)) {
+        alert("Please Enter Number");
+        return;
+      }
+      let data = {
+        name: name,
+        weight: weight,
+        height: height,
+      };
+      console.log(data);
+      //   fetch("http://localhost:3000/add", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Accept: "application/json",
+      //     },
+      //     body: JSON.stringify(data),
+      //   })
+      //     .then((res) => res.json())
+      //     .then((data) => {
+      //       console.log("Ans", data.ans);
+      //       document.getElementById("result").value = data.ans;
+      //     });
+    }
+    function clearInput() {
+      document.getElementById("fname").value = "";
+      document.getElementById("lname").value = "";
+      document.getElementById("result").value = "";
+    }
+  </script>
+</html>

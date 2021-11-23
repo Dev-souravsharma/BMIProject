@@ -1,0 +1,30 @@
+.heading {
+    background-color: blue;
+    font-size: 400px;
+    color: brown;
+  }
+  #texty {
+    color: red;
+  }
+  h1 {
+    background-color: royalblue;
+  }
+  .inputStyle {
+    display: flex;
+    flex-direction: row;
+  }
+  .labelStyle {
+    font-weight: bold;
+  }
+  .buttonStyle {
+    background-color: lightgray;
+    padding: 5px 30px 5px 30px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+  }
