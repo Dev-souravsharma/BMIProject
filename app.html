@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculator</title>
+    <title>BMI Calculator</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body class="bodyStyle">
@@ -43,9 +43,13 @@
         <button class="buttonStyle" onclick="addBMI()">Submit</button>
       </div>
       <br />
-      <div style="margin-left: 80px">
+      <p style="margin-left: 90px">
+        <a href="./table.html">Link</a>
+      </p>
+
+      <!-- <div style="margin-left: 80px">
         <button class="buttonStyle" onclick="clearInput()">Clear All</button>
-      </div>
+      </div> -->
     </div>
     <br /><br />
   </body>
@@ -56,7 +60,7 @@
       let weight = document.getElementById("lname").value;
       document.getElementById("lname").innerHTML = weight;
       let height = document.getElementById("height").value;
-      document.getElementById("lname").innerHTML = height;
+      document.getElementById("height").innerHTML = height;
       if (isNaN(weight) || isNaN(height)) {
         alert("Please Enter Number");
         return;
@@ -65,26 +69,45 @@
         name: name,
         weight: weight,
         height: height,
+        time: new Date(),
+      };
+      let calculateBMI = {
+        weight: weight,
+        height: height,
       };
       console.log(data);
-      //   fetch("http://localhost:3000/add", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Accept: "application/json",
-      //     },
-      //     body: JSON.stringify(data),
-      //   })
-      //     .then((res) => res.json())
-      //     .then((data) => {
-      //       console.log("Ans", data.ans);
-      //       document.getElementById("result").value = data.ans;
-      //     });
+      fetch("http://localhost:3000/calculate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(calculateBMI),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Ans", data);
+          alert("Status:" + data.weightStatus + " : " + data.message);
+          document.getElementById("result").value = data.data;
+        });
+      fetch("http://localhost:3000/addData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Ans", data);
+        });
     }
-    function clearInput() {
-      document.getElementById("fname").value = "";
-      document.getElementById("lname").value = "";
-      document.getElementById("result").value = "";
-    }
+    // function clearInput() {
+    //   document.getElementById("fname").value = "";
+    //   document.getElementById("lname").value = "";
+    //   document.getElementById("").value = "";
+    //   document.getElementById("result").value = "";
+    // }
   </script>
 </html>

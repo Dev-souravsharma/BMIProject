@@ -36,11 +36,16 @@ module.exports.calculateBMI = (req, res) => {
 };
 module.exports.addData = (req, res) => {
   console.log(req.body);
+  let height = req.body.height;
+  let weight = req.body.weight;
+  let heightSquare = height * height;
+  let result = (weight / heightSquare).toFixed(2);
   let newData = new User({
     name: req.body.name,
     height: req.body.height,
     weight: req.body.weight,
     time: req.body.time,
+    bmi: result,
   });
   return newData
     .save()

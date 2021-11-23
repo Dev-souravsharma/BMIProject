@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>Person Information</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+    />
+    <script
+      type="text/javascript"
+      language="javascript"
+      src="https://code.jquery.com/jquery-3.5.1.js"
+    ></script>
+    <script
+      type="text/javascript"
+      language="javascript"
+      src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"
+    ></script>
+    <script>
+      fetch("http://localhost:3000/getData", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Ans", data.data);
+          $(document).ready(function () {
+            $("#example").DataTable({
+              columns: [
+                { title: "id", className: "tableStyle" },
+                { title: "name", className: "tableStyle" },
+                { title: "height", className: "tableStyle" },
+                { title: "weight", className: "tableStyle" },
+                { title: "Bmi", className: "tableStyle" },
+              ],
+            });
+            const dt = $("#example").DataTable({ retrieve: true });
+            dt.clear();
+            console.log(data.data.length);
+            for (let i = 0; i < data.data.length; i += 1) {
+              console.log(data.data[i].height, "Muku");
+              dt.row.add([
+                `<td class="tableStyle" style="text-align:center; white-space:pre-wrap;">${
+                  i + 1
+                }</td>`,
+                `<td style="text-align:center; white-space:pre-wrap;"><p class = 'clientName'>${data.data[i].name}</p></td>`,
+                `<td style=" text-align:center; white-space:pre-wrap; ">${
+                  data.data[i].height || ""
+                }</td>`,
+                `<td style=" text-align:center; white-space:pre-wrap; ">${
+                  data.data[i].weight || ""
+                }</td>`,
+                `<td style="text-align:center; white-space:pre-wrap; ">${
+                  data.data[i].bmi || ""
+                }</td>`,
+                `<td style=" text-align:center;"><i class="far fa-edit fa-lg edit" id=${i}></i></td>`,
+              ]);
+            }
+            dt.draw();
+          });
+        });
+    </script>
+    <style>
+      .tableStyle {
+        text-align: start;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="example" class="display" width="100%"></table>
+  </body>
+</html>

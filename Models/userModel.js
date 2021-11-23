@@ -12,5 +12,8 @@ const userSchema = mongoose.Schema({
   time: {
     type: String,
   },
+  bmi: {
+    type: String,
+  },
 });
 mongoose.model("user", userSchema);
